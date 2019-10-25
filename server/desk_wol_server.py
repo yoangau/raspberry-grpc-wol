@@ -11,10 +11,11 @@ class PowerServicer(desk_wol_pb2_grpc.PowerServicer):
     @staticmethod
     def check_signature(request: desk_wol_pb2.PowerRequest) -> desk_wol_pb2.StatusResponse:
         return desk_wol_pb2.StatusResponse(
-            info=SignatureDecrypter.decrypt_signature("../tests/id_rsa_test.pub", request.token))
+            info=SignatureDecrypter.decrypt_signature("tests/id_rsa_test.pub", request.token))
 
     def PowerOn(self, request, context):
         status = PowerServicer.check_signature(request)
+
         if status.info is SignatureDecrypter.invalid_signature:
             return status
         yield status
