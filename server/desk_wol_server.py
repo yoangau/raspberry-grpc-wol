@@ -1,5 +1,7 @@
-import grpc
 from concurrent import futures
+
+import grpc
+
 import protos.pythonpb2.desk_wol_pb2 as dw_pb2
 import protos.pythonpb2.desk_wol_pb2_grpc as dw_pb2_grpc
 from server.signature_decrypter import SignatureDecrypter

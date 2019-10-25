@@ -1,4 +1,5 @@
 import unittest
+
 from client.signature_encrypter import SignatureEncrypter
 from server.signature_decrypter import SignatureDecrypter
 
