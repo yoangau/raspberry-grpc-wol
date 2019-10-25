@@ -1,7 +1,7 @@
 from Crypto.Signature import pss
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
-from common.signature import signature_message
+from common.signature_message import signature_message
 
 
 class SignatureEncrypter:
