@@ -5,8 +5,8 @@ sys.path.extend(['..', '../protos/pythonpb2'])
 
 import logging
 
-from server.desk_wol_server import PowerServicer
+from server.desk_wol_server import PowerService
 
 if __name__ == '__main__':
     logging.basicConfig()
-    PowerServicer.serve()
+    PowerService.serve()
