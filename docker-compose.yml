@@ -7,10 +7,10 @@ services:
       - ./:/usr/src/app
     ports:
       - 50051:50051
-    command: /bin/sh -c "pacman -Syu base-devel python3 python-pip --noconfirm && /bin/sh setup.sh && cd ./server && /bin/python3 server"
+    command: sh -c "sh setup.sh && cd ./server && python server"
   repeater:
-    image: archlinux/base
+    image: yoangau/raspberry-grpc-wol:latest
     working_dir: /usr/src/app
     volumes:
-      - ./server:/usr/src/app
-    command: /bin/sh -c "pacman -Syu base-devel python3 python-pip --noconfirm && /bin/sh setup.sh && cd ./server && /bin/python3 gpio_interface.py"
+      - ./:/usr/src/app
+    command: sh -c "sh setup.sh && cd ./server && python gpio_interface.py"
