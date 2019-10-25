@@ -36,10 +36,14 @@ class GPIOInterface:
             try:
                 GPIO.wait_for_edge(self.button_pin, GPIO.RISING)
                 print("Power Button Pressed")
+                status = self.power_on()
+                print(f'It {"did" if status else "did not"} work')
             except KeyboardInterrupt:
                 print("Error with repeater")
+                return
 
 
 if __name__ == '__main__':
     gpio_interface = GPIOInterface()
     gpio_interface.physical_repeater()
+    GPIO.cleanup()
