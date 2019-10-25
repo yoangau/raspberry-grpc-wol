@@ -13,7 +13,7 @@ class PowerService(dw_pb2_grpc.PowerServicer):
     def check_signature(request: dw_pb2.PowerRequest) -> dw_pb2.StatusResponse:
         return dw_pb2.StatusResponse(
             info=SignatureDecrypter.decrypt_signature(
-                "/home/yoangau/Documents/raspberry-grpc-wol/tests/id_rsa_test.pub", request.token))
+                "../tests/id_rsa_test.pub", request.token))
 
     def PowerOn(self, request, context):
         status = PowerService.check_signature(request)

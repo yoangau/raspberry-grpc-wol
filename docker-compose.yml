@@ -1,0 +1,11 @@
+version: "3"
+services:
+  server:
+    image: archlinux/base
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 50051:50051
+    command: /bin/sh -c "pacman -Syu base-devel python3 python-pip --noconfirm && /bin/sh setup.sh && cd ./server && /bin/python3 server"
+    #apk add build-base && /bin/sh setup.sh && /bin/python3 ./server/server
