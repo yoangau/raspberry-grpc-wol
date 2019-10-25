@@ -10,7 +10,7 @@ service Power {
 }
 
 message PowerRequest {
-    string token = 1;
+    bytes token = 1;
     int32 delay_sec = 2;
 }
 
