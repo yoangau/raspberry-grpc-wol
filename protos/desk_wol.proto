@@ -14,6 +14,6 @@ message PowerRequest {
     optional int32 delay_sec = 2;
 }
 
-message Status {
+message StatusResponse {
     string info = 1;
 }
