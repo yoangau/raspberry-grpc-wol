@@ -1,8 +1,8 @@
 import grpc
 from client.args_parser import ArgsParser
 from client.signature_encrypter import SignatureEncrypter
-import client.desk_wol_pb2 as dw_pb2
-import client.desk_wol_pb2_grpc as dw_pb2_grpc
+import protos.pythonpb2.desk_wol_pb2 as dw_pb2
+import protos.pythonpb2.desk_wol_pb2_grpc as dw_pb2_grpc
 
 
 class PowerClient:
