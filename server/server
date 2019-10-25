@@ -1,0 +1,10 @@
+import sys
+
+sys.path.extend(['.', '..'])
+import logging
+
+from server.desk_wol_server import PowerServicer
+
+if __name__ == '__main__':
+    logging.basicConfig()
+    PowerServicer.serve()

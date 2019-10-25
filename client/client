@@ -1,0 +1,10 @@
+#!/usr/bin/python3
+import sys
+sys.path.extend(['.', '..'])
+
+from client.desk_wol_client import PowerClient
+
+
+if __name__ == '__main__':
+    power_client = PowerClient()
+    power_client.exec()
