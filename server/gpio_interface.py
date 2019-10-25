@@ -38,3 +38,8 @@ class GPIOInterface:
                 print("Power Button Pressed")
             except KeyboardInterrupt:
                 print("Error with repeater")
+
+
+if __name__ == '__main__':
+    gpio_interface = GPIOInterface()
+    gpio_interface.physical_repeater()
