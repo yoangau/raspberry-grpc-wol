@@ -11,7 +11,7 @@ Install the linux distro of your choice on your raspberry-pi. Configure the wifi
 
 # physical setup
 1. power up the raspberry-pi from the [inside](https://www.amazon.ca/gp/product/B002GNU2V6/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&psc=1)
-2. you will need to plug the GPIO the way it is describe in the `gpio_interface.py` ![raspberry-pi-zero-gpio](https://www.raspberrypi.org/documentation/usage/gpio/images/gpio-numbers-pi2.png)
+2. you will need to plug the GPIO the way it is describe in the `gpio_interface.py` [raspberry-pi-zero-gpio](https://www.raspberrypi.org/documentation/usage/gpio/)
 3. plug the other part of the button to a 5v pin
 4. let the alimentation of the led on your motherboard
 
