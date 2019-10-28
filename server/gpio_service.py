@@ -34,24 +34,17 @@ class GPIOService(dw_pb2_grpc.GPIOServicer):
         time.sleep(sleep_time)
         GPIO.output(self.power_pin, GPIO.LOW)
 
-    def Signal(self, request, context) -> dw_pb2.SignalResponse:
-        method_map = {
-            0: self.power_on,
-            1: self.power_on,
-            2: self.hard_reset
-        }
-        return dw_pb2.SignalResponse(info=method_map[request.signal]())
+    def SignalOn(self, request, context):
+        return dw_pb2.SignalResponse(info=self.__send_signal(self.short_signal))
+
+    def SignalOff(self, request, context):
+        return dw_pb2.SignalResponse(info=self.__send_signal(self.short_signal))
+
+    def SignalHardReset(self, request, context):
+        return dw_pb2.SignalResponse(info=self.__send_signal(self.hard_reset_signal))
 
     def power_status(self) -> bool:
         return GPIO.input(self.status_pin)
-
-    def power_on(self) -> bool:
-        self.__send_signal(self.short_signal)
-        return self.power_status()
-
-    def hard_reset(self) -> bool:
-        self.__send_signal(self.hard_reset_signal)
-        return not self.power_status()
 
     def __physical_repeater(self) -> None:
         print("Power Button Pressed")

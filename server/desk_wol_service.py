@@ -13,6 +13,7 @@ import grpc
 import protos.pythonpb2.desk_wol_pb2 as dw_pb2
 import protos.pythonpb2.desk_wol_pb2_grpc as dw_pb2_grpc
 from common.ports import desk_wol_port, gpio_port
+from common.commands import *
 from server.signature_decrypter import SignatureDecrypter
 
 
@@ -28,21 +29,27 @@ class PowerService(dw_pb2_grpc.PowerServicer):
             info=SignatureDecrypter.decrypt_signature(
                 "../tests/id_rsa_test.pub", request.token))
 
-    def __signal(self, request, signal) -> [dw_pb2.StatusResponse]:
+    def __signal(self, request, signal: str) -> [dw_pb2.StatusResponse]:
+        command_map = {
+            power_on: self.stub.SignalOn,
+            power_off: self.stub.SignalOff,
+            hard_reset: self.stub.SignalHardReset
+        }
+
         status_infos = [PowerService.check_signature(request)]
-        signal_request = dw_pb2.SignalRequest(signal=signal)
-        signal_response = dw_pb2.StatusResponse(info=f"Signal success : {self.stub.Signal(signal_request).info}")
+        signal_response = dw_pb2.StatusResponse(info=f"Signal success : {command_map[signal]().info}")
         status_infos.append(signal_response)
+
         return status_infos
 
     def PowerOn(self, request, context) -> dw_pb2.StatusResponse:
-        return self.__signal(request, "POWERON")
+        return self.__signal(request, power_on)
 
     def PowerOff(self, request, context) -> dw_pb2.StatusResponse:
-        return self.__signal(request, "POWEROFF")
+        return self.__signal(request, power_off)
 
     def HardReset(self, request, context) -> dw_pb2.StatusResponse:
-        return self.__signal(request, "HARDRESET")
+        return self.__signal(request, hard_reset)
 
     @staticmethod
     def serve():
