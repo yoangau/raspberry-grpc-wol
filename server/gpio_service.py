@@ -46,7 +46,7 @@ class GPIOService(dw_pb2_grpc.GPIOServicer):
     def power_status(self) -> bool:
         return GPIO.input(self.status_pin)
 
-    def __physical_repeater(self) -> None:
+    def __physical_repeater(self, pin) -> None:
         print("Power Button Pressed")
         status = self.power_on()
         print(f'It {"did" if status else "did not"} work')
