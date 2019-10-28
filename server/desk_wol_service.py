@@ -37,7 +37,8 @@ class PowerService(dw_pb2_grpc.PowerServicer):
         }
 
         status_infos = [PowerService.check_signature(request)]
-        signal_response = dw_pb2.StatusResponse(info=f"Signal success : {command_map[signal]().info}")
+        signal_response = dw_pb2.StatusResponse(
+            info=f"Signal success : {command_map[signal](dw_pb2.google_dot_protobuf_dot_empty__pb2).info}")
         status_infos.append(signal_response)
 
         return status_infos
