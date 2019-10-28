@@ -4,12 +4,13 @@ import protos.pythonpb2.desk_wol_pb2 as dw_pb2
 import protos.pythonpb2.desk_wol_pb2_grpc as dw_pb2_grpc
 from client.args_parser import ArgsParser
 from client.signature_encrypter import SignatureEncrypter
+from common.ports import desk_wol_port
 
 
 class PowerClient:
     def __init__(self):
         self.args_parser = ArgsParser()
-        self.channel = grpc.insecure_channel('localhost:50051')
+        self.channel = grpc.insecure_channel(f'localhost:{desk_wol_port}')
         self.stub = dw_pb2_grpc.PowerStub(self.channel)
 
     def exec(self):
@@ -27,4 +28,5 @@ class PowerClient:
         if args.option == ArgsParser.hard_reset:
             status_response = self.stub.HardReset(power_request)
 
-        print(status_response.info)
+        for status in status_response:
+            print(status.info)
