@@ -15,32 +15,14 @@ class PowerService(dw_pb2_grpc.PowerServicer):
             info=SignatureDecrypter.decrypt_signature(
                 "../tests/id_rsa_test.pub", request.token))
 
-    def PowerOn(self, request, context):
-        status = PowerService.check_signature(request)
+    def PowerOn(self, request, context) -> dw_pb2.StatusResponse:
+        return PowerService.check_signature(request)
 
-        if status.info is SignatureDecrypter.invalid_signature:
-            return status
-        yield status
+    def PowerOff(self, request, context) -> dw_pb2.StatusResponse:
+        return PowerService.check_signature(request)
 
-        return dw_pb2.StatusResponse(info=f"Power on ...")
-
-    def PowerOff(self, request, context):
-        status = PowerService.check_signature(request)
-
-        if status.info is SignatureDecrypter.invalid_signature:
-            return status
-        yield status
-
-        return dw_pb2.StatusResponse(info=f"Power off ...")
-
-    def HardReset(self, request, context):
-        status = PowerService.check_signature(request)
-
-        if status.info is SignatureDecrypter.invalid_signature:
-            return status
-        yield status
-
-        return dw_pb2.StatusResponse(info=f"Hard reset ...")
+    def HardReset(self, request, context) -> dw_pb2.StatusResponse:
+        return PowerService.check_signature(request)
 
     @staticmethod
     def serve():
