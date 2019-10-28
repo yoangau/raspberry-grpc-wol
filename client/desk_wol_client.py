@@ -9,7 +9,7 @@ import protos.pythonpb2.desk_wol_pb2_grpc as dw_pb2_grpc
 from client.args_parser import ArgsParser
 from client.signature_encrypter import SignatureEncrypter
 from common.ports import desk_wol_port
-
+from common.commands import *
 
 class PowerClient:
     def __init__(self):
@@ -23,13 +23,13 @@ class PowerClient:
         power_request = dw_pb2.PowerRequest(token=signature)
         status_response: dw_pb2.StatusResponse = None
 
-        if args.option == ArgsParser.power_on:
+        if args.option == power_on:
             status_response = self.stub.PowerOn(power_request)
 
-        if args.option == ArgsParser.power_off:
+        if args.option == power_off:
             status_response = self.stub.PowerOff(power_request)
 
-        if args.option == ArgsParser.hard_reset:
+        if args.option == hard_reset:
             status_response = self.stub.HardReset(power_request)
 
         for status in status_response:
