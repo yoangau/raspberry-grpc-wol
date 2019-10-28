@@ -7,7 +7,7 @@ services:
       - ./:/usr/src/app
     ports:
       - 50051:50051
-    command: sh -c "sh setup.sh && cd ./server && python server"
+    command: sh -c "sh setup.sh && cd ./server && python desk_wol_service.py"
   gpio:
     image: yoangau/raspberry-grpc-wol:latest
     working_dir: /usr/src/app
