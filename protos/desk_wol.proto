@@ -2,13 +2,13 @@ syntax = "proto3";
 
 service Power {
 
-    rpc PowerOn (PowerRequest) returns (StatusResponse) {
+    rpc PowerOn (PowerRequest) returns (stream StatusResponse) {
     }
 
-    rpc PowerOff (PowerRequest) returns (StatusResponse) {
+    rpc PowerOff (PowerRequest) returns (stream StatusResponse) {
     }
 
-    rpc HardReset (PowerRequest) returns (StatusResponse) {
+    rpc HardReset (PowerRequest) returns (stream StatusResponse) {
     }
 }
 
@@ -19,4 +19,22 @@ message PowerRequest {
 
 message StatusResponse {
     string info = 1;
+}
+
+service GPIO {
+    rpc Signal (SignalRequest) returns (SignalResponse) {
+    }
+}
+
+message SignalRequest {
+    enum Signal {
+        POWERON = 0;
+        POWEROFF = 1;
+        HARDRESET = 2;
+    }
+    Signal signal = 1;
+}
+
+message SignalResponse {
+    bool info = 1;
 }
