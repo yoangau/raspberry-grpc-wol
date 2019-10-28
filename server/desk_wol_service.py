@@ -19,7 +19,7 @@ from server.signature_decrypter import SignatureDecrypter
 class PowerService(dw_pb2_grpc.PowerServicer):
 
     def __init__(self):
-        self.channel = grpc.insecure_channel(f'localhost:{gpio_port}')
+        self.channel = grpc.insecure_channel(f'gpio:{gpio_port}')
         self.stub = dw_pb2_grpc.GPIOStub(self.channel)
 
     @staticmethod
