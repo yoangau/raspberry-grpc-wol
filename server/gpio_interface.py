@@ -10,25 +10,26 @@ class GPIOInterface:
     status_pin: int = 24
     button_pin: int = 4
 
-    def __init__(self):
+    def __init__(self) -> None:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.power_pin, GPIO.OUT)
         GPIO.setup(self.status_pin, GPIO.IN)
         GPIO.setup(self.button_pin, GPIO.IN)
 
+    def __send_signal(self, sleep_time: int) -> None:
+        GPIO.output(self.power_pin, GPIO.HIGH)
+        time.sleep(sleep_time)
+        GPIO.output(self.power_pin, GPIO.LOW)
+
     def power_status(self) -> bool:
         return GPIO.input(self.status_pin)
 
     def power_on(self) -> bool:
-        GPIO.output(self.power_pin, GPIO.HIGH)
-        time.sleep(self.short_signal)
-        GPIO.output(self.power_pin, GPIO.LOW)
+        self.__send_signal(self.short_signal)
         return self.power_status()
 
     def hard_reset(self) -> bool:
-        GPIO.output(self.power_pin, GPIO.HIGH)
-        time.sleep(self.hard_reset_signal)
-        GPIO.output(self.power_pin, GPIO.LOW)
+        self.__send_signal(self.hard_reset_signal)
         return not self.power_status()
 
     def physical_repeater(self) -> None:
