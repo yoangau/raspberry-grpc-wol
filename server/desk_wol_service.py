@@ -31,7 +31,7 @@ class PowerService(dw_pb2_grpc.PowerServicer):
     def __signal(self, request, signal) -> [dw_pb2.StatusResponse]:
         status_infos = [PowerService.check_signature(request)]
         signal_request = dw_pb2.SignalRequest(signal=signal)
-        signal_response = dw_pb2.StatusResponse(info=f"Signal success : {self.stub.Signal(signal_request).status}")
+        signal_response = dw_pb2.StatusResponse(info=f"Signal success : {self.stub.Signal(signal_request).info}")
         status_infos.append(signal_response)
         return status_infos
 
