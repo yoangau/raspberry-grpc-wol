@@ -9,6 +9,7 @@ class GPIOInterface:
     power_pin: int = 23
     status_pin: int = 24
     button_pin: int = 4
+    debounce_time: int = 100
 
     def __init__(self) -> None:
         GPIO.setmode(GPIO.BCM)
@@ -35,7 +36,7 @@ class GPIOInterface:
     def physical_repeater(self) -> None:
         while True:
             try:
-                GPIO.wait_for_edge(self.button_pin, GPIO.RISING)
+                GPIO.wait_for_edge(self.button_pin, GPIO.RISING, bouncetime=self.debounce_time)
                 print("Power Button Pressed")
                 status = self.power_on()
                 print(f'It {"did" if status else "did not"} work')
