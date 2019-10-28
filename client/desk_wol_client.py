@@ -27,6 +27,4 @@ class PowerClient:
         if args.option == ArgsParser.hard_reset:
             status_response = self.stub.HardReset(power_request)
 
-        if status_response:
-            for status in status_response:
-                print(status.info)
+        print(status_response.info)

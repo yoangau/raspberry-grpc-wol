@@ -2,11 +2,11 @@ syntax = "proto3";
 
 service Power {
 
-    rpc PowerOn (PowerRequest) returns (stream StatusResponse) {}
+    rpc PowerOn (PowerRequest) returns (StatusResponse) {}
     
-    rpc PowerOff (PowerRequest) returns (stream StatusResponse) {}
+    rpc PowerOff (PowerRequest) returns (StatusResponse) {}
 
-    rpc HardReset (PowerRequest) returns (stream StatusResponse) {}
+    rpc HardReset (PowerRequest) returns (StatusResponse) {}
 }
 
 message PowerRequest {
