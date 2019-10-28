@@ -3,6 +3,8 @@ services:
   server:
     image: yoangau/raspberry-grpc-wol:latest
     working_dir: /usr/src/app
+    devices:
+      - "/dev/gpiomem:/dev/gpiomem"
     volumes:
       - ./:/usr/src/app
     ports:
@@ -11,6 +13,8 @@ services:
   repeater:
     image: yoangau/raspberry-grpc-wol:latest
     working_dir: /usr/src/app
+    devices:
+      - "/dev/gpiomem:/dev/gpiomem"
     volumes:
       - ./:/usr/src/app
     command: sh -c "sh setup.sh && cd ./server && python gpio_interface.py"
