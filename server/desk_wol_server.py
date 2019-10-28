@@ -44,7 +44,7 @@ class PowerService(dw_pb2_grpc.PowerServicer):
 
     @staticmethod
     def serve():
-        server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+        server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
         dw_pb2_grpc.add_PowerServicer_to_server(
             PowerService(), server)
         server.add_insecure_port('[::]:50051')
