@@ -41,7 +41,8 @@ class PowerService(dw_pb2_grpc.PowerServicer):
             info=f"Signal success : {command_map[signal](dw_pb2.Empty()).info}")
         status_infos.append(signal_response)
 
-        return status_infos
+        for status in status_infos:
+            yield status
 
     def PowerOn(self, request, context) -> dw_pb2.StatusResponse:
         return self.__signal(request, power_on)
