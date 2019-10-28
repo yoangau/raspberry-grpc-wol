@@ -1,3 +1,11 @@
+import os
+import sys
+
+# Todo: Dockerimage could be rebuild to add the right PYTHONPATH env var instead of this:
+sys.path.extend([os.environ['SERVERPATH'], f"{os.environ['SERVERPATH']}/protos/pythonpb2"])
+
+import logging
+
 from concurrent import futures
 
 import grpc
@@ -44,3 +52,8 @@ class PowerService(dw_pb2_grpc.PowerServicer):
         server.add_insecure_port(f'[::]:{desk_wol_port}')
         server.start()
         server.wait_for_termination()
+
+
+if __name__ == '__main__':
+    logging.basicConfig()
+    PowerService.serve()

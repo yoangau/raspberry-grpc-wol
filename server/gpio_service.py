@@ -1,3 +1,9 @@
+import os
+import sys
+
+# Todo: Dockerimage could be rebuild to add the right PYTHONPATH env var instead of this:
+sys.path.extend([os.environ['SERVERPATH'], f"{os.environ['SERVERPATH']}/protos/pythonpb2"])
+
 import time
 from concurrent import futures
 

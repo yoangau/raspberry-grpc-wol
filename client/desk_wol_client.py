@@ -1,3 +1,7 @@
+import sys
+
+sys.path.extend(['..', '../protos/pythonpb2'])
+
 import grpc
 
 import protos.pythonpb2.desk_wol_pb2 as dw_pb2
@@ -30,3 +34,8 @@ class PowerClient:
 
         for status in status_response:
             print(status.info)
+
+
+if __name__ == '__main__':
+    power_client = PowerClient()
+    power_client.exec()
