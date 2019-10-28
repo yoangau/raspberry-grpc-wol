@@ -48,8 +48,7 @@ class GPIOService(dw_pb2_grpc.GPIOServicer):
 
     def __physical_repeater(self, pin) -> None:
         print("Power Button Pressed")
-        status = self.power_on()
-        print(f'It {"did" if status else "did not"} work')
+        self.__send_signal(self.short_signal)
 
     def physical_repeater(self) -> None:
         GPIO.add_event_detect(self.button_pin, GPIO.RISING, callback=self.__physical_repeater,
