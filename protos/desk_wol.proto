@@ -1,5 +1,4 @@
 syntax = "proto3";
-import "google/protobuf/empty.proto";
 
 service Power {
 
@@ -23,16 +22,18 @@ message StatusResponse {
 }
 
 service GPIO {
-    rpc SignalOn (google.protobuf.Empty) returns (SignalResponse) {
+    rpc SignalOn (Empty) returns (SignalResponse) {
     }
 
-    rpc SignalOff (google.protobuf.Empty) returns (SignalResponse) {
+    rpc SignalOff (Empty) returns (SignalResponse) {
     }
 
-    rpc SignalHardReset (google.protobuf.Empty) returns (SignalResponse) {
+    rpc SignalHardReset (Empty) returns (SignalResponse) {
     }
 }
 
 message SignalResponse {
     bool info = 1;
 }
+
+message Empty {}
