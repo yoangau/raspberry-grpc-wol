@@ -11,9 +11,10 @@ services:
   gpio:
     image: yoangau/raspberry-grpc-wol:latest
     working_dir: /usr/src/app
-    devices:
-      - "/dev/gpiomem:/dev/gpiomem"
-      - "/dev/gpiochip0:/dev/gpiochip0"
+    privileged: true
+#    devices:
+#      - "/dev/gpiomem:/dev/gpiomem"
+#      - "/dev/gpiochip0:/dev/gpiochip0"
     volumes:
       - ./:/usr/src/app
     command: sh -c "sh setup.sh && cd ./server && python gpio_service.py"
