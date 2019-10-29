@@ -21,7 +21,7 @@ class GPIOService(dw_pb2_grpc.GPIOServicer):
     power_pin: int = 23
     status_pin: int = 24
     button_pin: int = 22
-    debounce_time: int = 100
+    debounce_time: int = 300
 
     def __init__(self) -> None:
         GPIO.setmode(GPIO.BCM)
@@ -35,13 +35,17 @@ class GPIOService(dw_pb2_grpc.GPIOServicer):
         GPIO.output(self.power_pin, GPIO.LOW)
 
     def SignalOn(self, request, context):
-        return dw_pb2.SignalResponse(info=self.__send_signal(self.short_signal))
+        self.__send_signal(self.short_signal)
+        return dw_pb2.SignalResponse(info=self.power_status())
 
     def SignalOff(self, request, context):
-        return dw_pb2.SignalResponse(info=self.__send_signal(self.short_signal))
+        self.__send_signal(self.short_signal)
+        return dw_pb2.SignalResponse(info=not self.power_status())
 
     def SignalHardReset(self, request, context):
-        return dw_pb2.SignalResponse(info=self.__send_signal(self.hard_reset_signal))
+        self.__send_signal(self.hard_reset_signal)
+        return dw_pb2.SignalResponse(info=self.power_status())
+
 
     def power_status(self) -> bool:
         return GPIO.input(self.status_pin)
