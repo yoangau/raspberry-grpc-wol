@@ -21,7 +21,7 @@ class GPIOService(dw_pb2_grpc.GPIOServicer):
     power_pin: int = 23
     status_pin: int = 24
     button_pin: int = 22
-    debounce_time: int = 300
+    debounce_time: int = 1000
 
     def __init__(self) -> None:
         GPIO.setmode(GPIO.BCM)
